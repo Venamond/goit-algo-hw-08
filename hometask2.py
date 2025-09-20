@@ -24,21 +24,17 @@ def insert(root: Node, value: int) -> Node:
             root.right = insert(root.right, value)
     return root
 
-
-def find_minimum(root: Node) -> int:
+def calculate_sum(root: Node) -> int:
     '''
-    Find the minimum value in a binary search tree.
+    Calculate the sum of all values in a binary search tree.
         Arg:
             root: Node - the root of the BST
         Returns:
-            int - the minimum value in the BST
+            int - the sum of all values in the BST
     '''
     if root is None:
-        raise ValueError("The tree is empty")
-    current = root
-    while current.left is not None:
-        current = current.left
-    return current.value
+        return 0
+    return root.value + calculate_sum(root.left) + calculate_sum(root.right)
 
 def print_tree(node: Node, prefix: str = "", is_left: bool = True):
     '''
@@ -70,4 +66,4 @@ if __name__ == "__main__":
     print()
     print("Binary Search Tree:")
     print_tree(root)
-    print(f"\033[32mMinimum value in the tree: {find_minimum(root)}\033[0m")
+    print(f"\033[32mSum of all values in the tree: {calculate_sum(root)}\033[0m")
